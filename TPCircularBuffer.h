@@ -158,7 +158,9 @@ static __inline__ __attribute__((always_inline)) void TPCircularBufferConsume(TP
     } else {
         buffer->fillCount -= amount;
     }
-    assert(buffer->fillCount >= 0);
+    if(!(buffer->fillCount >= 0)) {
+        TPCircularBufferClear(buffer);
+    }
 }
 
 /*!
@@ -194,7 +196,9 @@ static __inline__ __attribute__((always_inline)) void TPCircularBufferProduce(TP
     } else {
         buffer->fillCount += amount;
     }
-    assert(buffer->fillCount <= buffer->length);
+    if(!(buffer->fillCount <= buffer->length)) {
+        TPCircularBufferClear(buffer);
+    }
 }
 
 /*!
@@ -223,8 +227,9 @@ static __inline__ __attribute__((always_inline)) __deprecated_msg("use TPCircula
 void TPCircularBufferConsumeNoBarrier(TPCircularBuffer *buffer, uint32_t amount) {
     buffer->tail = (buffer->tail + amount) % buffer->length;
     buffer->fillCount -= amount;
-    assert(buffer->fillCount >= 0);
-}
+    if(!(buffer->fillCount >= 0)) {
+        TPCircularBufferClear(buffer);
+    }}
 
 /*!
  * Deprecated method
@@ -233,7 +238,9 @@ static __inline__ __attribute__((always_inline)) __deprecated_msg("use TPCircula
 void TPCircularBufferProduceNoBarrier(TPCircularBuffer *buffer, uint32_t amount) {
     buffer->head = (buffer->head + amount) % buffer->length;
     buffer->fillCount += amount;
-    assert(buffer->fillCount <= buffer->length);
+    if(!(buffer->fillCount <= buffer->length)) {
+        TPCircularBufferClear(buffer);
+    }
 }
 
 #ifdef __cplusplus
