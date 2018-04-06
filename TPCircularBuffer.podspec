@@ -13,9 +13,6 @@ Pod::Spec.new do |s|
   s.license            = { :type => 'MIT', :text => license }
   s.source             = { :git => 'https://github.com/michaeltyson/TPCircularBuffer.git', :tag => '1.6' }
   s.source_files   = '*.{c,h}'
-  # s.osx.source_files   = '*.{c,h}'
-  # s.tvos.source_files  = '*.{c,h}'
-  # s.watchos.source_files = '*TPCircularBuffer.c', '*TPCircularBuffer.h'
   s.requires_arc       = false
   s.ios.frameworks     = 'AudioToolbox'
   s.osx.frameworks     = 'AudioToolbox'
@@ -24,4 +21,5 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '4.0'
+  s.watchos.xcconfig = { 'EXCLUDED_SOURCE_FILE_NAMES' => '*+Audio*' }
 end
