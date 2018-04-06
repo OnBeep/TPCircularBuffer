@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.ios.source_files   = '*.{c,h}'
   s.osx.source_files   = '*.{c,h}'
   s.tvos.source_files  = '*.{c,h}'
-  s.watchos.source_files = 'TPCircularBuffer.c', 'TPCircularBuffer.h'
+  s.watchos.source_files = 'TPCircularBuffer/TPCircularBuffer.c', 'TPCircularBuffer/TPCircularBuffer.h'
   s.requires_arc       = false
   s.frameworks         = 'AudioToolbox'
   s.ios.deployment_target = '4.3'
